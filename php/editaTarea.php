@@ -1,10 +1,13 @@
 <?php
-
+//Documents\Github\projects\Practica4\php
 //Punto 2 - C
 /*editaTarea.php: Edita la tarea seleccionada. Los campos del formulario deben 
 ser los mismos al del formulario agregatarea.php, con diferencia de inicio de 
 formulario, ya que este debe consultar la tarea seleccionada y mostrar los 
 datos en los inputs correspondientes.*/
+
+
+//UPDATE: HTML en la Linea 82
 
 session_start();
 include "../conexion.php";
@@ -75,3 +78,47 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Tarea</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <?php include "../navbar.php"; ?>
+
+    <div class="container mt-4">
+        <h3>Editar Tarea</h3>
+
+        <form method="POST" class="mt-3">
+
+            <label>Nombre de la tarea</label>
+            <input type="text" name="TareaNombre" class="form-control"
+                value="<?php echo $tarea['TareaNombre']; ?>">
+            <label class="mt-3">Descripción</label>
+            <textarea name="Descripcion" class="form-control" rows="4"><?php echo $tarea['Descripcion']; ?></textarea>
+            <label class="mt-3">Estado</label>
+            <select name="EstadoID" class="form-select">
+                <?php while ($estado = mysqli_fetch_assoc($estadosResultado)) { ?>
+                    <option value="<?php echo $estado['id']; ?>"
+                        <?php echo ($estado['id'] == $tarea['EstadoID']) ? "selected" : ""; ?>>
+                        <?php echo $estado['nombre']; ?>
+                    </option>
+                <?php } ?>
+            </select>
+            <label class="mt-3">URL de imagen</label>
+            <input type="text" name="urlImagen" class="form-control"
+                value="<?php echo $tarea['urlImagen']; ?>">
+            <button type="submit" class="btn btn-primary mt-4">Guardar cambios</button>
+            <a href="listaTareas.php" class="btn btn-secondary mt-4">Cancelar</a>
+
+        </form>
+    </div>
+
+</body>
+
+</html>
