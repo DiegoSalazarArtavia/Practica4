@@ -1,0 +1,10 @@
+nav.navbar{
+    background-color:  #001f3f;
+}
+nav .navbar-brand, nav .nav-link{
+    color: #ffff !important;
+}
+body{
+    background-color: #ffffff;
+    transition: background 0.5s ease;
+}
